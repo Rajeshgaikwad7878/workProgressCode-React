@@ -63,11 +63,9 @@ const SidebarShow = () => {
         <MenuItem icon={<RiPencilLine />}>
           <NavLink to="/dashboard/adduser">Add user</NavLink>
         </MenuItem>
-        <SubMenu title="Reports" icon={<RiFileCopy2Line />}>
-          <MenuItem>Track Report</MenuItem>
-          <MenuItem>Inventory Report</MenuItem>
-          <MenuItem>Customer Report</MenuItem>
-        </SubMenu>
+        <MenuItem icon={<RiPencilLine />}>
+          <NavLink to="/dashboard/employeelist">Employee List</NavLink>
+        </MenuItem>
         <SubMenu title="Account" icon={<RiAccountBoxLine />}>
           <MenuItem>Permissions</MenuItem>
           <MenuItem>Settings</MenuItem>

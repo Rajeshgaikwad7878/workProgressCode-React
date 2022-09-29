@@ -34,6 +34,7 @@ const SignUp=()=> {
           className="form-control"
             placeholder="Enter user name"
             {...register("name", { required: true })}
+            data-testId="userName"
           />
           <p className="error">
             {errors.name?.type === "required" && "Name is required"}

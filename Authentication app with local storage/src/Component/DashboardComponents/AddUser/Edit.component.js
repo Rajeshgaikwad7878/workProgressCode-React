@@ -8,9 +8,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import Employees from "../Employee/EmployessData";
-const AddUser = () => {
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+import { useEffect } from "react";
+
+const EditUser = () => {
+  const [name, setEnteredName] = useState("");
+  const [age, setEnteredAge] = useState("");
+  const [id, setId] = useState("");
+
+  let navigate = useNavigate();
 
   const nameChangeHandler = (event) => {
     setEnteredName(event.target.value);
@@ -19,38 +24,45 @@ const AddUser = () => {
     setEnteredAge(event.target.value);
   };
 
-  const submitHandler = () => {
-    let ids = uuid();
-    let uniqId = ids.slice(0, 8);
-    const userData = {
-      id: uniqId,
-      name: enteredName,
-      age: enteredAge,
-    };
-    Employees.push(userData);
-    toast.error("User added successfully");
-    console.log(userData);
+  var index = Employees.map(function (e) {
+    return e.id;
+  }).indexOf(id);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    let a = Employees[index];
+    a.name = name;
+    a.age = age;
+    navigate("/dashboard/employeelist");
   };
+  useEffect(() => {
+    setEnteredName(localStorage.getItem("Name"));
+    setEnteredAge(localStorage.getItem("Age"));
+    setId(localStorage.getItem("Id"));
+  }, []);
+
   return (
     <div>
       <Card className={classes.login}>
         <div className="container mt-3 table">
           <section className="d-flex justify-content-between">
             <div className={classes.userForm}>
-              <h3 className="text-center col-lg">Add User</h3>
+              <h3 className="text-center col-lg">Update User</h3>
               <Form>
                 <Form.Group className="mb-3 col-lg" controlId="formBasicEmail">
                   <Form.Control
                     type="name"
                     name="name"
+                    value={name}
                     onChange={nameChangeHandler}
-                    placeholder="Enter Name"
+                    placeholder="Enter name"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3 col-lg" controlId="formBasicAge">
                   <Form.Control
                     type="number"
                     name="age"
+                    value={age}
                     onChange={ageChangeHandler}
                     placeholder="Enter Your Age"
                   />
@@ -58,7 +70,7 @@ const AddUser = () => {
 
                 <Link to="/dashboard/employeelist">
                   <Button className={classes.btn} onClick={submitHandler}>
-                    Add user
+                    Update user
                   </Button>
                 </Link>
               </Form>
@@ -75,4 +87,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default EditUser;
