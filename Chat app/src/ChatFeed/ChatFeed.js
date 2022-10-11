@@ -1,6 +1,6 @@
-import MyMessage from './MyMessage';
-import TheirMessage from './TheirMessage';
-import MessageForm from './MessageForm';
+import MyMessage from '../MyMessage/MyMessage';
+import TheirMessage from '../TheirMessage/TheirMessage';
+import MessageForm from '../MessageForm/MessageForm';
 
 const ChatFeed = (props) => {
   const { chats, activeChat, userName, messages } = props;
@@ -48,7 +48,8 @@ const ChatFeed = (props) => {
       <div className="chat-title-container">
         <div className="chat-title">{chat?.title}</div>
         <div className="chat-subtitle">
-          {chat.people.map((person) => ` ${person.person.username}`)}
+          {chat.people.map((person) => ` ${person.person.username}` )
+          }
         </div>
       </div>
       {renderMessages()}
